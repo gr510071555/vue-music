@@ -18,9 +18,9 @@
           <div class="song-list-wrapper">
               <song-list :songs="songs"></song-list>
           </div>
-          <div.loading-container v-show="!songs.length">
+          <div class="loading-container" v-show="!songs.length">
               <loading></loading>
-          </div.loading-container>
+          </div>
       </scroll>
   </div>
 </template>

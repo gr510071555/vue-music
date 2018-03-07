@@ -45,7 +45,12 @@
               this._triggerPrecent()
           },
           progressClick(e) {
-              this._offset(e.offsetX)
+              // progressBar 到屏幕最左侧的距离 rect.left
+              const rect = this.$refs.progressBar.getBoundingClientRect()
+              const offsetWidth = e.pageX - rect.left
+              // 这里当点击 progressBtn 的时候 e.offsetX 获取不对
+              // this._offset(e.offsetX)
+              this._offset(offsetWidth)
               this._triggerPrecent()
           },
           _triggerPrecent() {

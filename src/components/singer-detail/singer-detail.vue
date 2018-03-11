@@ -28,7 +28,6 @@
         },
         created () {
             this._getDetail()
-            console.log(this.singer)
         },
         methods: {
             _getDetail() {

@@ -1,6 +1,6 @@
 <template>
   <div class="recommend" ref="recommand">
-    <scroll ref="scroll"  class="recommend-content" :data="distList">
+    <scroll ref="scroll"  class="recommend-content" :data="discList">
       <div>
         <div v-if="recommands.length" class="slider-wrapper">
           <slider>
@@ -14,37 +14,39 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li v-for="item in distList" :key="item.id" class="item">
+            <li @click="selectItem(item)" v-for="item in discList" :key="item.id" class="item">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.picUrl" class="needsclick">
+                <img width="60" height="60" v-lazy="item.imgurl" class="needsclick">
               </div>
               <div class="text">
-                <h2 class="name" v-html="item.songListAuthor"></h2>
-                <p class="desc" v-html="item.songListDesc"></p>
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="loading-container" v-show="!distList.length">
+      <div class="loading-container" v-show="!discList.length">
         <loading></loading>
       </div>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import Loading from 'base/loading/loading'
   import Scroll from 'base/scroll/scroll'
   import Slider from 'base/slider/slider'
-  import {getRecommend} from 'api/recommend'
+  import {getRecommend, getDistList} from 'api/recommend'
   import {ERR_OK} from 'api/config'
   import {playlistMixin} from 'common/js/mixin'
+  import {mapMutations} from 'vuex'
   export default {
     mixins: [playlistMixin],
     data () {
       return {
         recommands: [],
-        distList: []
+        discList: []
       }
     },
     created () {
@@ -57,6 +59,12 @@
         this.$refs.recommand.style.bottom = bottom
         this.$refs.scroll.refresh()
       },
+      selectItem(item) {
+        this.$router.push({
+          path: `/recommend/${item.dissid}`
+        })
+        this.setDisc(item)
+      },
       _getRecommend () {
         getRecommend().then((res) => {
           if (res.code === ERR_OK) {
@@ -65,9 +73,9 @@
         })
       },
       _getDistList () {
-        getRecommend().then((res) => {
+        getDistList().then((res) => {
           if (res.code === ERR_OK) {
-            this.distList = res.data.songList
+            this.discList = res.data.list
           }
         })
       },
@@ -76,7 +84,10 @@
           this.$refs.scroll.refresh()
           this.checkLoaded = true
         }
-      }
+      },
+      ...mapMutations({
+        setDisc: 'SET_DISC'
+      })
     },
     components: {
       'slider': Slider,

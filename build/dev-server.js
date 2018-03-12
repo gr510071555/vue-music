@@ -25,20 +25,20 @@ const proxyTable = config.dev.proxyTable
 const app = express()
 
 var apiRoutes = express.Router()
-// apiRoutes.get('/getDistList', function (req, res) {
-//   var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-//   axios.get(url, {
-//     headres: {
-//       referer: 'https://c.y.qq.com/',
-//       host: 'c.y.qq.com'
-//     },
-//     params: req.query
-//   }).then((response) => {
-//     res.json(response.data)
-//   }).catch((e) => {
-//     console.log(e)
-//   })
-// })
+apiRoutes.get('/getDiscList', function (req, res) {
+  var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    res.json(response.data)
+  }).catch((e) => {
+    console.log(e)
+  })
+})
 // app.use('/api', apiRoutes)
 // 代理歌词接口
 apiRoutes.get('/lyric', function (req, res) {
@@ -59,6 +59,21 @@ apiRoutes.get('/lyric', function (req, res) {
       }
     }
     res.json(ret)
+  }).catch((e) => {
+    console.log(e)
+  })
+})
+// 代理歌单详情接口
+apiRoutes.get('/getSongList', function (req, res) {
+  var url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    res.json(response.data)
   }).catch((e) => {
     console.log(e)
   })

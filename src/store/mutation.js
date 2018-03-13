@@ -23,6 +23,9 @@ const matutaions = {
     },
     [types.SET_DISC](state, disc) {
         state.disc = disc
+    },
+    [types.SET_TOPLIST](state, topList) {
+        state.topList = topList
     }
 }
 export default matutaions

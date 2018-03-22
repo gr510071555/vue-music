@@ -26,6 +26,9 @@ const matutaions = {
     },
     [types.SET_TOPLIST](state, topList) {
         state.topList = topList
+    },
+    [types.SET_SEARCHHISTORY](state, history) {
+        state.searchHistory = history
     }
 }
 export default matutaions

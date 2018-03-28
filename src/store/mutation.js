@@ -29,6 +29,9 @@ const matutaions = {
     },
     [types.SET_SEARCHHISTORY](state, history) {
         state.searchHistory = history
+    },
+    [types.SET_PLAY_HISTORY](state, history) {
+        state.playHistory = history
     }
 }
 export default matutaions

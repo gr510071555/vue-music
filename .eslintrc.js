@@ -28,6 +28,7 @@ module.exports = {
     'indent': 'off',
     'no-mixed-spaces-and-tabs': 'off',
     'no-useless-return': 'off',
-    'no-unused-vars': 0
+    'no-unused-vars': 0,
+    "no-extra-parens": 0
   }
 }

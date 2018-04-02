@@ -72,7 +72,8 @@
     "webpack-hot-middleware": "^2.18.2",
     "webpack-merge": "^4.1.0",
     "stylus-loader": "^3.0.1",
-    "stylus": "0.52.4"
+    "stylus": "0.52.4",
+    "vconsole": "^3.1.0"
   },
   "engines": {
     "node": ">= 4.0.0",
